@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,4 +54,19 @@ public class PeronaController {
 		return new ResponseEntity<>(_persona, HttpStatus.CREATED);
 	}
 	
+	@DeleteMapping("/persona/{id}")
+	public ResponseEntity<Persona> eliminarPersona (@PathVariable("id") Integer id)
+	throws ResourceNotFoundException{
+		
+		Persona persona = personaService.buscarPorId(id)
+				.orElseThrow(()-> new ResourceNotFoundException("Recurso con el id: " + id + " no encontrado"));
+		
+		return new ResponseEntity<>(personaService.eliminarPersona(persona), HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/persona")
+	public ResponseEntity<HttpStatus> eliminarTodasLasPersonas(){
+		personaService.eliminarTodosPersona();
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 }
