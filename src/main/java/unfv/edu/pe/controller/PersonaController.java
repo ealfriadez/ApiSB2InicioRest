@@ -20,7 +20,7 @@ import unfv.edu.pe.service.PersonaService;
 
 @RestController
 @RequestMapping("/api/v1")
-public class PeronaController {
+public class PersonaController {
 
 	@Autowired
 	private PersonaService personaService;
