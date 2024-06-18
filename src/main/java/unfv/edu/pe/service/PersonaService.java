@@ -49,4 +49,5 @@ public class PersonaService {
 	public void eliminarTodosPersona() {
 		lstPersonas.removeAll(lstPersonas);
 	}
+	
 }
